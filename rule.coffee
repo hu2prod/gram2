@@ -366,14 +366,14 @@ class @Gram_rule
   
   # unused
   # cmp : (t)->
-  #   return false if @ret_hash_key != t.hash_key
+  #   return false if @ret_hash_key != t.ret_hash_key
   #   return false if !@cmp_seq(t)
   #   return false if !@cmp_mx(t)
   #   return false if !@cmp_strict(t)
   #   return
   
   _head_cmp : (t)->
-    # return false if @ret_hash_key != t.hash_key
+    return false if @ret_hash_key != t.ret_hash_key
     return false if !@cmp_seq(t)
     return false if !@cmp_mx(t)
     return false if !@cmp_strict(t)
