@@ -304,3 +304,17 @@ describe 'tokenizer section', ()->
     assert.equal list[3][0].pos,  1
     assert.equal list[3][0].line, 2
   
+  it 'eol', ()->
+    t = new g.Tokenizer
+    
+    t.parser_list.push (new g.Token_parser 'Xdent', /^\n/, (_this, ret_value, q)->
+      _this.text = _this.text.substr 1 # \n
+      node = new g.Node
+      node.mx_hash.hash_key = 'eol'
+      ret_value.push [node]
+    )
+    list = t.go '\n'
+    assert.equal list[0].length, 1
+    assert.equal list[0][0].mx_hash.hash_key, 'eol'
+    return
+  

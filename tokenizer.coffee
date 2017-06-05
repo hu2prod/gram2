@@ -53,6 +53,7 @@ class @Tokenizer
   
   regex     : (regex)->
     ret = regex.exec(@text)
+    return if !ret
     cap_text = ret[0]
     if -1 == cap_text.indexOf '\n'
       @pos += cap_text.length
@@ -66,7 +67,7 @@ class @Tokenizer
     @tail_space_len = /^[ \t]*/.exec(@text)[0].length
     @pos += @tail_space_len
     @text = @text.substr @tail_space_len
-    ret
+    return
   
   initial_prepare_table: ()->
     @positive_symbol_table = {}
