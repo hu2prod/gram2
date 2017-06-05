@@ -718,9 +718,16 @@ class @Gram
     @t_hki_a_pos_new_list.length  = max_hki
     @t_hki_b_pos_old_list.length  = max_hki
     @t_hki_b_pos_new_list.length  = max_hki
+    
+    t_hki_a_new_count_list = []
+    t_hki_b_new_count_list = []
+    for i in [0 ... max_hki]
+      t_hki_a_new_count_list.push 0
+      t_hki_b_new_count_list.push 0
+    
     init_max_idx = ()->
       ret = []
-      for i in [0 .. max_idx]
+      for j in [0 .. max_idx]
         ret.push []
       ret
     
@@ -773,6 +780,18 @@ class @Gram
     
     for i in [1 .. Gram.magic_attempt_limit]
       @new_new_list.clear()
+      
+      # MORE OPT jump list
+      for hash_key_idx in [0 ... max_hki]
+        count = 0
+        for v in @t_hki_a_pos_new_list[hash_key_idx]
+          count += v.length
+        t_hki_a_new_count_list[hash_key_idx] = count
+        count = 0
+        for v in @t_hki_b_pos_new_list[hash_key_idx]
+          count += v.length
+        t_hki_b_new_count_list[hash_key_idx] = count
+      
       # L2R
       rule_2_idx = 0
       len = @hash_key_list.length
@@ -780,6 +799,12 @@ class @Gram
         for hash_key_idx_2 in [0 ... len]
           rule_list = @rule_2_by_arg[rule_2_idx++]
           continue if rule_list.length == 0
+          # new_list_b_count = 1
+          # new_list_a_count = 1
+          new_list_b_count = t_hki_b_new_count_list[hash_key_idx_1]
+          new_list_a_count = t_hki_a_new_count_list[hash_key_idx_2]
+          continue if new_list_a_count == 0 and new_list_b_count == 0
+          
           node_old_list_b = @t_hki_b_pos_old_list[hash_key_idx_1]
           node_new_list_b = @t_hki_b_pos_new_list[hash_key_idx_1]
           node_old_list_a = @t_hki_a_pos_old_list[hash_key_idx_2]
@@ -818,9 +843,12 @@ class @Gram
                     new_node.b = b.b
                     @new_new_list.push new_node
             return
-          fn node_old_list_a, node_new_list_b
-          fn node_new_list_a, node_old_list_b
-          fn node_new_list_a, node_new_list_b
+          if new_list_b_count
+            fn node_old_list_a, node_new_list_b
+          if new_list_a_count
+            fn node_new_list_a, node_old_list_b
+          if new_list_a_count and new_list_b_count
+            fn node_new_list_a, node_new_list_b
       # R2L ничего не даст т.к. new_new_list
       
       # singles
