@@ -406,7 +406,7 @@ str_replace = (search, replace, str)-> str.split(search).join(replace)
   v = str_replace '[HASH]',   '#', v
 
 class @Gram
-  @magic_attempt_limit_mult : 4
+  @magic_attempt_limit_mult : 20
   initial_rule_list : []
   
   hash_key_list : []
