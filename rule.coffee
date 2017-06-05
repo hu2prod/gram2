@@ -406,7 +406,7 @@ str_replace = (search, replace, str)-> str.split(search).join(replace)
   v = str_replace '[HASH]',   '#', v
 
 class @Gram
-  @magic_attempt_limit : 20
+  @magic_attempt_limit_mult : 4
   initial_rule_list : []
   
   hash_key_list : []
@@ -778,7 +778,8 @@ class @Gram
     
     # BUG? правила вида term term лезут во все токены в поисках value даже в те, где есть только value_view
     
-    for i in [1 .. Gram.magic_attempt_limit]
+    limit = Gram.magic_attempt_limit_mult*max_idx
+    for i in [1 .. limit]
       @new_new_list.clear()
       
       # MORE OPT jump list
@@ -890,7 +891,7 @@ class @Gram
         fin_collect()
         return ret 
     
-    throw new Error "magic_attempt_limit exceed"
+    throw new Error "magic_attempt_limit_mult exceed"
   
   go : (node_hypothesis_list, opt={})->
     opt.reemerge ?= true
