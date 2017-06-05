@@ -410,6 +410,7 @@ class @Gram
   initial_rule_list : []
   
   hash_key_list : []
+  extra_hash_key_list : []
   _optimized : false
   
   # Array<Array<Node> >
@@ -425,6 +426,7 @@ class @Gram
   constructor:()->
     @initial_rule_list    = []
     @hash_key_list        = []
+    @extra_hash_key_list  = []
     @t_hki_a_pos_old_list = []
     @t_hki_a_pos_new_list = []
     @t_hki_b_pos_old_list = []
@@ -656,6 +658,7 @@ class @Gram
     # ###################################################################################################
     @hash_key_list.clear()
     @hash_key_list.push '*' # special position for string constants
+    @hash_key_list.uappend @extra_hash_key_list
     for rule in synth_rule_list
       @hash_key_list.upush rule.ret_hash_key
       for v in rule.sequence
@@ -734,6 +737,8 @@ class @Gram
         v.a = idx
         v.b = idx+1
         v.hash_key_idx = @hash_key_list.idx v.mx_hash.hash_key
+        if v.hash_key_idx == -1
+          throw new Error "WTF v.hash_key_idx == -1 v.mx_hash.hash_key=#{v.mx_hash.hash_key} list=#{JSON.stringify @hash_key_list}"
         @t_hki_a_pos_new_list[v.hash_key_idx][idx  ].push v
         @t_hki_b_pos_new_list[v.hash_key_idx][idx+1].push v
         if v.hash_key_idx != 0
