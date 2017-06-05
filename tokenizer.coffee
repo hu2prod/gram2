@@ -44,6 +44,7 @@ class @Tokenizer
   
   # atparse access
   token_sequence_hypothesis_list : null
+  ret_access : null
   
   constructor : ()->
     @parser_list= []
@@ -103,7 +104,7 @@ class @Tokenizer
     @text = text
     @initial_prepare_table() if !@is_prepared
     @prepare_table()
-    ret = []
+    @ret_access = ret = []
     while @text.length > 0
       found = false
       token_hypothesis_list = []
