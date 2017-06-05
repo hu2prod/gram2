@@ -779,6 +779,7 @@ class @Gram
       for hash_key_idx_1 in [0 ... len]
         for hash_key_idx_2 in [0 ... len]
           rule_list = @rule_2_by_arg[rule_2_idx++]
+          continue if rule_list.length == 0
           node_old_list_b = @t_hki_b_pos_old_list[hash_key_idx_1]
           node_new_list_b = @t_hki_b_pos_new_list[hash_key_idx_1]
           node_old_list_a = @t_hki_a_pos_old_list[hash_key_idx_2]

@@ -9,3 +9,4 @@ Nonpolynomial superpower parser, better, faster
 * `parse_text_list` not exists anymore. Use `go`. No ugly "simple tokenizer" incorporated
 * deep pass `value` is not working anymore. Use `value_view` or `node.value or node.value_view`.
 * all possible hask_keys should be present in gram rules.
+* BUG/FEATURE. You must match not only value but also hash_key, because no base.
