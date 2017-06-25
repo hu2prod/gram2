@@ -1,10 +1,10 @@
 assert = require 'assert'
-util = require 'fy/test_util'
+util = (require 'fy').test_util
 
 {
   Gram
-} = require '../rule'
-{Node} = require '../node'
+} = require '../src/rule'
+{Node} = require '../src/node'
 simple_tok = (str)->
   list = []
   for v in str.split /\s+/g

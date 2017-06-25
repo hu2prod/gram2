@@ -1,7 +1,7 @@
 # BUG hash_to_pos для head/tail правил отсутствует
 
 module = @
-require 'fy/codegen'
+require 'fy/lib/codegen'
 {Node} = require './node'
 {explicit_list_generator} = require './explicit_list_generator'
 # ###################################################################################################

@@ -1,11 +1,11 @@
 assert = require 'assert'
-util = require 'fy/test_util'
+util = (require 'fy').test_util
 
 {
   Gram_rule
   Gram
-} = require '../rule'
-{Node} = require '../node'
+} = require '../src/rule'
+{Node} = require '../src/node'
 
 describe 'strict_rule section', ()->
   list = """
