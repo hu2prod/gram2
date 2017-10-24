@@ -3,6 +3,7 @@ util = require 'fy/test_util'
 
 {
   Gram
+  gram_escape
 } = require '../src/rule'
 {Node} = require '../src/node'
 simple_tok = (str)->
@@ -680,4 +681,8 @@ describe 'gram_rule section', ()->
       assert.equal res[0].value_array[0].value_view, 'a * b'
       assert.equal res[0].value_array[2].value_view, 'c'
 
-    
+  it 'gram_escape', ()->
+    assert.equal gram_escape("?"), "[QUESTION]"
+    assert.equal gram_escape("|"), "[PIPE]"
+    assert.equal gram_escape("$"), "[DOLLAR]"
+    assert.equal gram_escape("#"), "[HASH]"

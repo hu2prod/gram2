@@ -399,6 +399,12 @@ class @Gram_rule_proxy
 #    Gram
 # ###################################################################################################
 str_replace = (search, replace, str)-> str.split(search).join(replace)
+@gram_escape= (v) ->
+  v = str_replace '|', '[PIPE]',     v
+  v = str_replace '?', '[QUESTION]', v
+  v = str_replace '$', '[DOLLAR]',   v
+  v = str_replace '#', '[HASH]',     v
+
 @gram_unescape= (v) ->
   v = str_replace '[PIPE]',   '|', v
   v = str_replace '[QUESTION]','?', v
