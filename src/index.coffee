@@ -1,5 +1,6 @@
 g       = (require './rule')
 @Gram               = g.Gram
+@gram_escape        = g.gram_escape
 
 g       = (require './node')
 @Node               = g.Node
