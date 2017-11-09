@@ -38,3 +38,18 @@ class @Node
       ret[k] = clone v unless ret[k] == v
     ret
   
+  deep_clone : ()->
+    ret = new module.Node
+    ret.mx_hash = clone @mx_hash
+    ret.hash_key_idx  = @hash_key_idx
+    ret.value         = @value
+    ret.value_view    = @value_view
+    for v in @value_array
+      ret.value_array.push v.deep_clone()
+    
+    ret.line          = @line
+    ret.pos           = @pos
+    ret.a             = @a
+    ret.b             = @b
+    ret
+  

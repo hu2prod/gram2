@@ -922,6 +922,7 @@ class @Gram
         return
       
       for tree,k in ret
+        ret[k] = tree = tree.deep_clone()
         walk tree
     
     ret
