@@ -909,6 +909,7 @@ class @Gram
           walk v
         
         if tree.mx_hash.is_proxy_rule
+          delete tree.mx_hash.is_proxy_rule
           [head, tail] = tree.value_array
           tree.value_array.clear()
           tree.value_array.append head.value_array
