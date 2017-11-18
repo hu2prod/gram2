@@ -879,10 +879,12 @@ class @Gram
       
       for hki in [0 ... max_hki]
         for pos in [0 .. max_idx]
-          @t_hki_a_pos_old_list[hki][pos].append @t_hki_a_pos_new_list[hki][pos]
-          @t_hki_a_pos_new_list[hki][pos].clear()
-          @t_hki_b_pos_old_list[hki][pos].append @t_hki_b_pos_new_list[hki][pos]
-          @t_hki_b_pos_new_list[hki][pos].clear()
+          if @t_hki_a_pos_new_list[hki][pos].length
+            @t_hki_a_pos_old_list[hki][pos].append @t_hki_a_pos_new_list[hki][pos]
+            @t_hki_a_pos_new_list[hki][pos].clear()
+          if @t_hki_b_pos_new_list[hki][pos].length
+            @t_hki_b_pos_old_list[hki][pos].append @t_hki_b_pos_new_list[hki][pos]
+            @t_hki_b_pos_new_list[hki][pos].clear()
       
       for node in @new_new_list
         @t_hki_a_pos_new_list[node.hash_key_idx][node.a].push node
